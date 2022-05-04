@@ -4,7 +4,26 @@ const express = require('express');
 const { dbConfig } = require('../config');
 
 const petsRoutes = express.Router();
+// --------------------------------------
+petsRoutes.get('/pets-log', async (req, res) => {
+  let connection;
+  try {
+    connection = await mysql.createConnection(dbConfig);
+    console.log('connected');
+    const sql =
+      'SELECT * FROM `pets` LEFT JOIN `logs` on pets.id = logs.pet_id GROUP BY pets.name;';
+    const [result] = await connection.query(sql);
+    res.json(result);
+  } catch (error) {
+    console.log('error in pets route', error);
+    res.status(500).json('stmh wrong');
+  } finally {
+    await connection?.end();
+  }
+});
 
+// ------------------------------------------------------------
+// ------------------------------------------------------------
 // -------------------------------------POST pet into table
 petsRoutes.post('/pets/row', async (req, res) => {
   let connection;

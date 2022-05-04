@@ -1,5 +1,11 @@
 GET http://localhost:3306/
 ###
+#######################################  /pets-log
+GET http://localhost:3306/api/pets-log
+
+
+
+
 ################# PETS ROUTES ###########################################
 ###----------------------------------------GET all
 GET http://localhost:3306/api/pets
@@ -52,3 +58,14 @@ Content-Type: application/json
 ###
 POST http://localhost:3306/api/logs/row
 Content-Type: application/json
+
+######
+
+POST http://localhost:3306/api/logs/row
+Content-Type: application/json
+
+{
+    "pet_id": 4,
+    "description": "virskinimo sutrikimas",
+    "status": "Duoti vaistai, isvyko namo."
+  }
