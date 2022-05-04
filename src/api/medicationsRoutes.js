@@ -3,20 +3,20 @@ const mysql = require('mysql2/promise');
 const express = require('express');
 const { dbConfig } = require('../config');
 
-const petsRoutes = express.Router();
+const medicRoutes = express.Router();
 
-// -------------------------------------POST pet into table
-petsRoutes.post('/pets/row', async (req, res) => {
+// -------------------------------------POST medication into table
+medicRoutes.post('/medications/row', async (req, res) => {
   let connection;
   try {
     connection = await mysql.createConnection(dbConfig);
     console.log('Prisijungem');
-    const sql = `INSERT INTO  pets  ( name ,  dod ,  client_email ) VALUES ('brisius', '2022-11-11', 'brisisu@gmail.com')`;
+    const sql = `INSERT INTO  medications  ( name ,  description ) VALUES ('aspirinas', 'nuo skausmo ')`;
     const [result] = await connection.query(sql);
     // console.log('connected', connection);
     res.json(result);
   } catch (error) {
-    console.log('error in pets route', error);
+    console.log('error in medications route', error);
     res.status(500).json('stmh wrong');
   } finally {
     await connection?.end();
@@ -24,18 +24,18 @@ petsRoutes.post('/pets/row', async (req, res) => {
   }
 });
 // ------------------------------------- post table
-petsRoutes.post('/pets/table', async (req, res) => {
+medicRoutes.post('/medications/table', async (req, res) => {
   let connection;
   try {
     connection = await mysql.createConnection(dbConfig);
     console.log('Prisijungem');
     const sql =
-      'CREATE TABLE slscom_vetbee7.pets  (  id  INT NOT NULL AUTO_INCREMENT ,  name  TEXT NOT NULL ,  dod  TEXT NOT NULL ,  client_email  TEXT NOT NULL ,  archived  TINYINT NOT NULL , PRIMARY KEY ( id )) ENGINE = InnoDB';
+      'CREATE TABLE slscom_vetbee7.medications  (  id  INT NOT NULL AUTO_INCREMENT ,  name  TEXT NOT NULL , description TEXT NOT NULL, PRIMARY KEY ( id )) ENGINE = InnoDB';
     const [result] = await connection.query(sql);
     // console.log('connected', connection);
     res.json(result);
   } catch (error) {
-    console.log('error in pets route', error);
+    console.log('error in medications route', error);
     res.status(500).json('stmh wrong');
   } finally {
     await connection?.end();
@@ -43,20 +43,20 @@ petsRoutes.post('/pets/table', async (req, res) => {
   }
 });
 // -------------------------------------------GET posted table
-petsRoutes.get('/pets', async (req, res) => {
+medicRoutes.get('/medications', async (req, res) => {
   let connection;
   try {
     connection = await mysql.createConnection(dbConfig);
     console.log('connected');
-    const sql = 'SELECT * FROM pets';
+    const sql = 'SELECT * FROM medications';
     const [result] = await connection.query(sql);
     res.json(result);
   } catch (error) {
-    console.log('error in pets route', error);
+    console.log('error in medications route', error);
     res.status(500).json('stmh wrong');
   } finally {
     await connection?.end();
   }
 });
-// --------------------------------------
-module.exports = petsRoutes;
+
+module.exports = medicRoutes;

@@ -4,6 +4,9 @@ const morgan = require('morgan');
 
 const { PORT } = require('./config');
 const petsRoutes = require('./api/petsRoutes');
+const prescripRoutes = require('./api/prescriptionsRoutes');
+const medicRoutes = require('./api/medicationsRoutes');
+const logsRoutes = require('./api/logsRoutes');
 
 const app = express();
 
@@ -16,6 +19,10 @@ app.get('/', (req, res) => res.json('hello'));
 
 // Routes
 app.use('/api', petsRoutes);
+app.use('/api', prescripRoutes);
+app.use('/api', medicRoutes);
+app.use('/api', logsRoutes);
+
 // 404
 
 app.all('*', (req, res) => {

@@ -1,12 +1,35 @@
 GET http://localhost:3306/
-
+###
+################# PETS ROUTES ###########################################
 ###
 GET http://localhost:3306/api/pets
 
 ###---------------------------------------POST pets Table
-POST http://localhost:3306/api/pets
+POST http://localhost:3306/api/pets/table
 Content-Type: application/json
 
 ###---------------------------------------POST pets Table
-POST http://localhost:3306/api/pets
+POST http://localhost:3306/api/pets/row
+Content-Type: application/json
+
+################# medications ROUTES ###########################################
+
+GET http://localhost:3306/api/medications
+###
+POST http://localhost:3306/api/medications/table
+Content-Type: application/json
+###
+POST http://localhost:3306/api/medications/row
+Content-Type: application/json
+
+
+################### logs routes#########################
+
+
+GET http://localhost:3306/api/logs
+###
+POST http://localhost:3306/api/logs/table
+Content-Type: application/json
+###
+POST http://localhost:3306/api/logs/row
 Content-Type: application/json
