@@ -4,7 +4,7 @@ const express = require('express');
 const { dbConfig } = require('../config');
 
 const petsRoutes = express.Router();
-// --------------------------------------
+// --------------------------------------/pets-log
 petsRoutes.get('/pets-log', async (req, res) => {
   let connection;
   try {
@@ -34,6 +34,27 @@ petsRoutes.post('/pets/row', async (req, res) => {
     const sql = `INSERT INTO  pets  ( name ,  dod ,  client_email ) VALUES (?, ?, ?)`;
 
     const [newPetsObj] = await connection.execute(sql, [name, dod, client_email]);
+    // console.log('connected', connection);
+    res.json(newPetsObj);
+  } catch (error) {
+    console.log('error in pets route', error);
+    res.status(500).json('stmh wrong');
+  } finally {
+    await connection?.end();
+    console.log('connection closed');
+  }
+});
+// -------------------------------------POST pet into table
+petsRoutes.post('/pets/row/delete/:id', async (req, res) => {
+  let connection;
+  try {
+    const { id } = req.params;
+
+    connection = await mysql.createConnection(dbConfig);
+    console.log('Prisijungem');
+    const sql = `UPDATE  pets  SET  archived  =  1  WHERE  pets . id  = ?;`;
+
+    const [newPetsObj] = await connection.execute(sql, [id]);
     // console.log('connected', connection);
     res.json(newPetsObj);
   } catch (error) {

@@ -27,6 +27,10 @@ Content-Type: application/json
     "client_email": "miau@gmail.com"
       }
 
+######
+
+POST http://localhost:3306/api/pets/row/delete/1
+
 ################# medications ROUTES ###########################################
 
 GET http://localhost:3306/api/medications
