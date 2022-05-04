@@ -73,4 +73,21 @@ prescripRoutes.get('/prescriptions', async (req, res) => {
 //   movie JOIN casting ON movie.id=movieid
 //         JOIN actor   ON actorid=actor.id
 
+prescripRoutes.get('/prescr-pet-med', async (req, res) => {
+  let connection;
+  try {
+    connection = await mysql.createConnection(dbConfig);
+    console.log('connected');
+    const sql =
+      'SELECT * FROM `prescriptions`  JOIN `pets` ON prescriptions.pet_id = pets.id  JOIN medications ON prescriptions.medication_id =medications.id GROUP BY pets.name';
+    const [result] = await connection.query(sql);
+    res.json(result);
+  } catch (error) {
+    console.log('error in pets route', error);
+    res.status(500).json('stmh wrong');
+  } finally {
+    await connection?.end();
+  }
+});
+
 module.exports = prescripRoutes;

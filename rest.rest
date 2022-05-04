@@ -90,3 +90,5 @@ Content-Type: application/json
 ###
 GET http://localhost:3306/api/prescriptions
 ###
+GET http://localhost:3306/api/prescr-pet-med
+###
