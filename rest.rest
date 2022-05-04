@@ -1,3 +1,12 @@
 GET http://localhost:3306/
+
 ###
-GET http://localhost:3306/
+GET http://localhost:3306/api/pets
+
+###---------------------------------------POST pets Table
+POST http://localhost:3306/api/pets
+Content-Type: application/json
+
+###---------------------------------------POST pets Table
+POST http://localhost:3306/api/pets
+Content-Type: application/json
