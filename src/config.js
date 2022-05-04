@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.DB_PORT || 8000;
 
 const dbConfig = {
   host: process.env.DB_HOST,
