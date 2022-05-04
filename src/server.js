@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const { PORT } = require('./config');
+const petsRoutes = require('./api/petsRoutes');
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(morgan('dev'));
 app.get('/', (req, res) => res.json('hello'));
 
 // Routes
-
+app.use('/api', petsRoutes);
 // 404
 
 app.all('*', (req, res) => {
