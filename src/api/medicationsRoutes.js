@@ -9,10 +9,13 @@ const medicRoutes = express.Router();
 medicRoutes.post('/medications/row', async (req, res) => {
   let connection;
   try {
+    const { name, description } = req.body;
+
     connection = await mysql.createConnection(dbConfig);
     console.log('Prisijungem');
-    const sql = `INSERT INTO  medications  ( name ,  description ) VALUES ('aspirinas', 'nuo skausmo ')`;
-    const [result] = await connection.query(sql);
+    const sql = `INSERT INTO  medications  ( name ,  description ) VALUES (?, ?)`;
+
+    const [result] = await connection.execute(sql, [name, description]);
     // console.log('connected', connection);
     res.json(result);
   } catch (error) {
@@ -23,6 +26,24 @@ medicRoutes.post('/medications/row', async (req, res) => {
     console.log('connection closed');
   }
 });
+// // -------------------------------------POST medication into table
+// medicRoutes.post('/medications/row', async (req, res) => {
+//   let connection;
+//   try {
+//     connection = await mysql.createConnection(dbConfig);
+//     console.log('Prisijungem');
+//     const sql = `INSERT INTO  medications  ( name ,  description ) VALUES ('aspirinas', 'nuo skausmo ')`;
+//     const [result] = await connection.query(sql);
+//     // console.log('connected', connection);
+//     res.json(result);
+//   } catch (error) {
+//     console.log('error in medications route', error);
+//     res.status(500).json('stmh wrong');
+//   } finally {
+//     await connection?.end();
+//     console.log('connection closed');
+//   }
+// });
 // ------------------------------------- post table
 medicRoutes.post('/medications/table', async (req, res) => {
   let connection;

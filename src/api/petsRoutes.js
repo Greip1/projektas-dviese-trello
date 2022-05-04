@@ -9,12 +9,14 @@ const petsRoutes = express.Router();
 petsRoutes.post('/pets/row', async (req, res) => {
   let connection;
   try {
+    const { name, dod, client_email } = req.body;
     connection = await mysql.createConnection(dbConfig);
     console.log('Prisijungem');
-    const sql = `INSERT INTO  pets  ( name ,  dod ,  client_email ) VALUES ('brisius', '2022-11-11', 'brisisu@gmail.com')`;
-    const [result] = await connection.query(sql);
+    const sql = `INSERT INTO  pets  ( name ,  dod ,  client_email ) VALUES (?, ?, ?)`;
+
+    const [newPetsObj] = await connection.execute(sql, [name, dod, client_email]);
     // console.log('connected', connection);
-    res.json(result);
+    res.json(newPetsObj);
   } catch (error) {
     console.log('error in pets route', error);
     res.status(500).json('stmh wrong');
@@ -23,6 +25,24 @@ petsRoutes.post('/pets/row', async (req, res) => {
     console.log('connection closed');
   }
 });
+// -------------------------------------POST pet into table
+// petsRoutes.post('/pets/row', async (req, res) => {
+//   let connection;
+//   try {
+//     connection = await mysql.createConnection(dbConfig);
+//     console.log('Prisijungem');
+//     const sql = `INSERT INTO  pets  ( name ,  dod ,  client_email ) VALUES ('brisius', '2022-11-11', 'brisisu@gmail.com')`;
+//     const [result] = await connection.query(sql);
+//     // console.log('connected', connection);
+//     res.json(result);
+//   } catch (error) {
+//     console.log('error in pets route', error);
+//     res.status(500).json('stmh wrong');
+//   } finally {
+//     await connection?.end();
+//     console.log('connection closed');
+//   }
+// });
 // ------------------------------------- post table
 petsRoutes.post('/pets/table', async (req, res) => {
   let connection;

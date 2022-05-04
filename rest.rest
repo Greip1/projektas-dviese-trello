@@ -1,27 +1,46 @@
 GET http://localhost:3306/
 ###
 ################# PETS ROUTES ###########################################
-###
+###----------------------------------------GET all
 GET http://localhost:3306/api/pets
 
 ###---------------------------------------POST pets Table
 POST http://localhost:3306/api/pets/table
 Content-Type: application/json
 
-###---------------------------------------POST pets Table
+###---------------------------------------POST pets 
 POST http://localhost:3306/api/pets/row
 Content-Type: application/json
+###---------------------------------------POST body pets
+POST http://localhost:3306/api/pets/row
+Content-Type: application/json
+
+ {
+    "name": "Miau",
+    "dod": "2016-10-11",
+    "client_email": "miau@gmail.com"
+      }
 
 ################# medications ROUTES ###########################################
 
 GET http://localhost:3306/api/medications
 ###
+
 POST http://localhost:3306/api/medications/table
 Content-Type: application/json
+
 ###
 POST http://localhost:3306/api/medications/row
 Content-Type: application/json
 
+###---------------------------------------------
+POST http://localhost:3306/api/medications/row
+Content-Type: application/json
+
+ {
+    "name": "Mezim",
+    "description": "virskinimui"
+  }
 
 ################### logs routes#########################
 
