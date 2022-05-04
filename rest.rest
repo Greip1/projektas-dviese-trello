@@ -73,3 +73,20 @@ Content-Type: application/json
     "description": "virskinimo sutrikimas",
     "status": "Duoti vaistai, isvyko namo."
   }
+##################################################### prescriptions ##########################
+POST http://localhost:3306/api/prescriptions/table
+Content-Type: application/json
+
+###
+POST http://localhost:3306/api/prescriptions/row
+Content-Type: application/json
+
+{
+ "medication_id": 1,
+      "pet_id": 1,
+      "comment": "pasveiko suo"
+}
+
+###
+GET http://localhost:3306/api/prescriptions
+###
