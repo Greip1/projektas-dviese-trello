@@ -58,5 +58,6 @@ petsRoutes.get('/pets', async (req, res) => {
     await connection?.end();
   }
 });
+
 // --------------------------------------
 module.exports = petsRoutes;
