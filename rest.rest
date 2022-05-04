@@ -1,5 +1,11 @@
 GET http://localhost:3306/
 ###
+#######################################  /pets-log
+GET http://localhost:3306/api/pets-log
+
+
+
+
 ################# PETS ROUTES ###########################################
 ###----------------------------------------GET all
 GET http://localhost:3306/api/pets
@@ -20,6 +26,10 @@ Content-Type: application/json
     "dod": "2016-10-11",
     "client_email": "miau@gmail.com"
       }
+
+######
+
+POST http://localhost:3306/api/pets/row/delete/1
 
 ################# medications ROUTES ###########################################
 
@@ -52,3 +62,14 @@ Content-Type: application/json
 ###
 POST http://localhost:3306/api/logs/row
 Content-Type: application/json
+
+######
+
+POST http://localhost:3306/api/logs/row
+Content-Type: application/json
+
+{
+    "pet_id": 4,
+    "description": "virskinimo sutrikimas",
+    "status": "Duoti vaistai, isvyko namo."
+  }
