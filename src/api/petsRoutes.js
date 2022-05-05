@@ -45,14 +45,14 @@ petsRoutes.post('/pets/row', async (req, res) => {
   }
 });
 // -------------------------------------POST pet into table
-petsRoutes.post('/pets/row/delete/:id', async (req, res) => {
+petsRoutes.get('/pets/row/delete/:id', async (req, res) => {
   let connection;
   try {
     const { id } = req.params;
 
     connection = await mysql.createConnection(dbConfig);
     console.log('Prisijungem');
-    const sql = `UPDATE  pets  SET  archived  =  1  WHERE  pets . id  = ?;`;
+    const sql = `UPDATE  pets  SET  archived  =  1  WHERE  pets.id  = ?;`;
 
     const [newPetsObj] = await connection.execute(sql, [id]);
     // console.log('connected', connection);
@@ -116,6 +116,23 @@ petsRoutes.get('/pets', async (req, res) => {
     res.status(500).json('stmh wrong');
   } finally {
     await connection?.end();
+  }
+});
+
+petsRoutes.get('/pets/notArchived', async (req, res) => {
+  let conn;
+  try {
+    conn = await mysql.createConnection(dbConfig);
+    console.log('connected');
+
+    const sql = 'SELECT * FROM pets WHERE archived = 0';
+    const [rows] = await conn.execute(sql);
+    res.json(rows);
+  } catch (error) {
+    console.log('error in home route', error);
+    res.status(500).json('stmh wrong');
+  } finally {
+    await conn?.end();
   }
 });
 
