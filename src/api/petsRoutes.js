@@ -52,7 +52,7 @@ petsRoutes.post('/pets/row/delete/:id', async (req, res) => {
 
     connection = await mysql.createConnection(dbConfig);
     console.log('Prisijungem');
-    const sql = `UPDATE  pets  SET  archived  =  1  WHERE  pets . id  = ?;`;
+    const sql = `UPDATE  pets  SET  archived  =  1  WHERE  pets.id  = ?;`;
 
     const [newPetsObj] = await connection.execute(sql, [id]);
     // console.log('connected', connection);
