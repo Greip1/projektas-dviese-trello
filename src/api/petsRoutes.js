@@ -119,5 +119,22 @@ petsRoutes.get('/pets', async (req, res) => {
   }
 });
 
+petsRoutes.get('/pets/notArchived', async (req, res) => {
+  let conn;
+  try {
+    conn = await mysql.createConnection(dbConfig);
+    console.log('connected');
+
+    const sql = 'SELECT * FROM pets WHERE archived = 0';
+    const [rows] = await conn.execute(sql);
+    res.json(rows);
+  } catch (error) {
+    console.log('error in home route', error);
+    res.status(500).json('stmh wrong');
+  } finally {
+    await conn?.end();
+  }
+});
+
 // --------------------------------------
 module.exports = petsRoutes;
