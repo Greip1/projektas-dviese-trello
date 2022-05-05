@@ -9,6 +9,8 @@ GET http://localhost:3306/api/pets-log
 ################# PETS ROUTES ###########################################
 ###----------------------------------------GET all
 GET http://localhost:3306/api/pets
+###----------------------------------------GET select  by:
+GET http://localhost:3306/api/pets/select/2
 ###----------------------------------------GET not archived
 GET http://localhost:3306/api/pets/notArchived
 

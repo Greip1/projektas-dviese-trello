@@ -135,6 +135,27 @@ petsRoutes.get('/pets/notArchived', async (req, res) => {
     await conn?.end();
   }
 });
+// ================== id selecting
+petsRoutes.get('/pets/select/:id', async (req, res) => {
+  let connection;
+  try {
+    const { id } = req.params;
+
+    connection = await mysql.createConnection(dbConfig);
+    console.log('Prisijungem');
+    const sql = `SELECT * FROM pets WHERE id=${id}`;
+
+    const [newPetsObj] = await connection.execute(sql, [id]);
+    // console.log('connected', connection);
+    res.json(newPetsObj);
+  } catch (error) {
+    console.log('error in pets route', error);
+    res.status(500).json('stmh wrong');
+  } finally {
+    await connection?.end();
+    console.log('connection closed');
+  }
+});
 
 // --------------------------------------
 module.exports = petsRoutes;
