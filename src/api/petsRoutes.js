@@ -45,7 +45,7 @@ petsRoutes.post('/pets/row', async (req, res) => {
   }
 });
 // -------------------------------------POST pet into table
-petsRoutes.post('/pets/row/delete/:id', async (req, res) => {
+petsRoutes.get('/pets/row/delete/:id', async (req, res) => {
   let connection;
   try {
     const { id } = req.params;
